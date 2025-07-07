@@ -6,20 +6,19 @@ public class InteractionArea : MonoBehaviour
 {
     public GameObject interactionMessage;
     public MercanciaScript mercancia;
-    // Start is called before the first frame update
+
     void Start()
     {
         interactionMessage.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (mercancia)
             {
-                Destroy(mercancia.gameObject);
+                mercancia.Comprar(); // ✅ LLAMAMOS AL MÉTODO CORRECTO
                 StopInteraction();
             }
         }
@@ -32,7 +31,6 @@ public class InteractionArea : MonoBehaviour
         if (mercancia)
         {
             interactionMessage.SetActive(true);
-
         }
     }
 
@@ -46,6 +44,4 @@ public class InteractionArea : MonoBehaviour
     {
         StopInteraction();
     }
-
-    
 }
