@@ -6,7 +6,6 @@ public class InteractionArea : MonoBehaviour
 {
     public GameObject interactionMessage;
     public MercanciaScript mercancia;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,24 +17,23 @@ public class InteractionArea : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Destroy(mercancia.gameObject);
-            StopInteraction();
+            if (mercancia)
+            {
+                Destroy(mercancia.gameObject);
+                StopInteraction();
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.name);
-        interactionMessage.SetActive(true);
         mercancia = other.GetComponent<MercanciaScript>();
         if (mercancia)
         {
             interactionMessage.SetActive(true);
+
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        StopInteraction();
     }
 
     void StopInteraction()
@@ -43,5 +41,11 @@ public class InteractionArea : MonoBehaviour
         interactionMessage.SetActive(false);
         mercancia = null;
     }
-}
 
+    private void OnTriggerExit(Collider other)
+    {
+        StopInteraction();
+    }
+
+    
+}
